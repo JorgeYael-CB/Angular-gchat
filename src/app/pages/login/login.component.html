@@ -1,9 +1,22 @@
-<h1 class="text-center my-32 font-black text-white md:text-5xl text-3xl font-mono">Welcome Back</h1>
+<h1 class="text-center mt-48 mb-14 font-black text-white md:text-5xl text-3xl font-mono">Welcome Back</h1>
 
 <div class="max-w-xl mx-auto px-6 py-3 bg-white rounded-sm">
-  <h3 class="text-center mb-4 font-semibold">Inicia sesion para continuar</h3>
+  <h3 class="text-center text-xl mb-8 font-semibold">Inicia sesion para continuar</h3>
 
   <div>
     <app-input-email (succesEmailEvent)="updateEmail($event)"></app-input-email>
+    <app-input-password (succesPasswordEvent)="updatePassword($event)"></app-input-password>
+  </div>
+
+  <div class="mt-1">
+    <p class="text-sm mb-4">New user? <a class="underline text-blue-600" routerLink="/register">Create account</a></p>
+
+    <div class="flex justify-center">
+      <button
+        class="md:w-1/2 w-full"
+        [disabled]="!isValidForm()"
+        mat-raised-button
+      >Sign in</button>
+    </div>
   </div>
 </div>
