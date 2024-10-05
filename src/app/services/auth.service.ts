@@ -7,7 +7,7 @@ import { ILoginUser } from '../interfaces/api/auth/ILoginUser';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
   private urlBase: string = `http://localhost:8080`;
   private url: string = `${this.urlBase}/api/auth`;
 
@@ -15,7 +15,7 @@ export class AuthServiceService {
 
 
   public registerUser(body: {email: string, password: string, name: string}): Observable<IRegisterUser>{
-    return this.http.post<IRegisterUser>(`${this.url}/reister`, body);
+    return this.http.post<IRegisterUser>(`${this.url}/register`, body);
   }
 
   public loginUser(body: {email: string, password: string}): Observable<ILoginUser>{

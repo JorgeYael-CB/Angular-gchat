@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,16 +26,16 @@ export class InputPasswordComponent {
   constructor(){
     merge(this.password.statusChanges, this.password.valueChanges)
       .pipe(takeUntilDestroyed())
-      .subscribe( () => this.updateErrorMessage())
+      .subscribe( () => this.updateErrorMessage());
   }
 
 
-  clickEvent(event: MouseEvent){
+  protected clickEvent(event: MouseEvent){
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
 
-  updateErrorMessage(){
+  protected updateErrorMessage(){
     if( this.password.hasError('passwordError') ){
       this.succesPasswordEvent.emit(undefined);
       this.passwordError.set(this.password.getError('passwordError'));
