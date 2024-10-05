@@ -1,0 +1,36 @@
+<h1 class="mt-36 text-blue-200 font-black md:text-5xl text-3xl text-center">Welcome to GChat</h1>
+<div class="text-white font-medium mt-2 md:max-w-md max-w-xs text-center mx-auto text-xs mb-20 px-2">
+  <p>Bienvenido a a GChat, una red social nueva disponible para todos los usuarios</p>
+  <a class="underline text-center text-blue-400" routerLink="/about">Obtener mas informacion</a>
+</div>
+
+
+
+<div class="max-w-xl mx-auto bg-white px-6 py-4">
+  <h3 class="text-center text-xl mb-8 font-bold">Crea una cuenta para continuar</h3>
+
+  <div>
+    <app-input-username (succesNameEvent)="updateName($event)"></app-input-username>
+    <app-input-email (succesEmailEvent)="updateEmail($event)"></app-input-email>
+    <app-input-password (succesPasswordEvent)="updatePassword($event)"></app-input-password>
+  </div>
+
+  <div class="mt-1">
+    <p class="text-sm mb-4">Already account? <a class="underline text-blue-600" routerLink="/register">Sign in</a></p>
+
+    @if (isLoading()) {
+      <app-spinner-loading-form></app-spinner-loading-form>
+    }
+
+    <div class="flex justify-center">
+      <button
+        (click)="onSubmit()"
+        type="submit"
+        class="md:w-1/2 w-full"
+        [disabled]="!isValidForm() || isLoading()"
+        mat-raised-button
+      >Sign up</button>
+    </div>
+  </div>
+</div>
+
