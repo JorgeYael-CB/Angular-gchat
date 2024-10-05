@@ -1,4 +1,4 @@
-import { IResponse } from "../IResponse";
+import { IResponseSucces } from "../IResponseSucces";
 
 
-export interface ILoginUser extends IResponse<string> {}
+export interface ILoginUser extends IResponseSucces<string> {}

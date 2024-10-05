@@ -11,7 +11,7 @@
   <div class="mt-1">
     <p class="text-sm mb-4">New user? <a class="underline text-blue-600" routerLink="/register">Create account</a></p>
 
-    @if (isLoading) {
+    @if (isLoading()) {
       <app-spinner-loading-form></app-spinner-loading-form>
     }
 
@@ -20,9 +20,11 @@
         (click)="onSubmit()"
         type="submit"
         class="md:w-1/2 w-full"
-        [disabled]="!isValidForm() || isLoading"
+        [disabled]="!isValidForm() || isLoading()"
         mat-raised-button
       >Sign in</button>
     </div>
+
+    <app-show-errors [err]="err()"></app-show-errors>
   </div>
 </div>

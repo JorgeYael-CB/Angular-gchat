@@ -1,17 +1,5 @@
 
-
-export interface IFieldError {
-  field: string;
-  message: string;
-}
-
-export interface IResponseError {
-  err: string | IFieldError[];
-}
-
-export interface IResponse<T> {
+export interface IResponse {
   status: number;
   date: number;
-  data: T;
-  token?: string;
 }

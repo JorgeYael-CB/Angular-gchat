@@ -1,0 +1,8 @@
+
+@if (errToErrors()) {
+  <ul class="space-y-2 my-2">
+    @for (error of errToErrors(); track $index) {
+      <li class="bg-red-500 hover:bg-red-600 transition-colors px-2 py-1 rounded-md text-white">{{error}}</li>
+    }
+  </ul>
+}
