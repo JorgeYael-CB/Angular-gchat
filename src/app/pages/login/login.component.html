@@ -11,10 +11,16 @@
   <div class="mt-1">
     <p class="text-sm mb-4">New user? <a class="underline text-blue-600" routerLink="/register">Create account</a></p>
 
+    @if (isLoading) {
+      <app-spinner-loading-form></app-spinner-loading-form>
+    }
+
     <div class="flex justify-center">
       <button
+        (click)="onSubmit()"
+        type="submit"
         class="md:w-1/2 w-full"
-        [disabled]="!isValidForm()"
+        [disabled]="!isValidForm() || isLoading"
         mat-raised-button
       >Sign in</button>
     </div>
