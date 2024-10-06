@@ -13,6 +13,6 @@ export interface IUserDto extends IDto {
   description:string;
   name:string;
   images: IPhotoPreviewDto[];
-  profileImage: IPhotoPreviewDto;
+  profileImage?: IPhotoPreviewDto;
   servers: IServerPreviewDto[];
 }

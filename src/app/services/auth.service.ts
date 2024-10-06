@@ -43,8 +43,7 @@ export class AuthService {
       );
   }
 
-  public get getUser(): IUserDto | undefined{
-    if( !this.user() ) return undefined;
+  public get getUser(): IUserDto | undefined {
     return structuredClone(this.user());
   }
 
