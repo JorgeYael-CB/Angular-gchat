@@ -1,5 +1,5 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { InputEmailComponent } from "../../components/input-email/input-email.component";
 import { InputPasswordComponent } from "../../components/input-password/input-password.component";
 import { InputUsernameComponent } from "../../components/input-username/input-username.component";
@@ -8,6 +8,9 @@ import { SpinnerLoadingFormComponent } from "../../components/spinner-loading-fo
 import { ShowErrorsComponent } from "../../components/show-errors/show-errors.component";
 import { TypeError } from '../../interfaces/api/IResponseError';
 import { AuthService } from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { loginAction } from '../../store/AuthStore.actions';
+import { IAuthState } from '../../interfaces/store/Auth.state';
 
 
 
@@ -19,14 +22,18 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
   email = signal<string | undefined>(undefined);
   password = signal<string | undefined>(undefined);
   name = signal<string | undefined>(undefined);
   isLoading = signal(false);
   err = signal<TypeError | undefined>(undefined);
 
+
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private authStore: Store<{ auth: IAuthState }>,
+    private router: Router,
   ){}
 
 
@@ -55,7 +62,8 @@ export class RegisterComponent {
         next: (res) => {
           this.isLoading.set(false);
           this.err.set(undefined);
-          console.log(res);
+          this.authStore.dispatch(loginAction({token: res.token!, user: res.data}));
+          this.router.navigate(['/']);
         },
         error: (error) => {
           this.isLoading.set(false);
