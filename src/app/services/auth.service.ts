@@ -74,6 +74,7 @@ export class AuthService {
       );
   }
 
+
   public updateUser(){}
 
   public getUserByParams(){}
@@ -90,8 +91,6 @@ export class AuthService {
   private saveData( data: IResponseSucces<IUserDto> ){
     this.user.set(data.data);
     this.token.set(data.token!);
-
-    console.log("Cookie guardada");
     this.cookieService.set('token', data.token!);
   }
 
