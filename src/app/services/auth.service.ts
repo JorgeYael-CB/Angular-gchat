@@ -7,6 +7,7 @@ import { IUserDto } from '../interfaces/api/dtos/IUserDto';
 import {CookieService} from 'ngx-cookie-service';
 import { IValidateToken } from '../interfaces/api/auth/IValidateToken';
 import { IResponseSucces } from '../interfaces/api/IResponseSucces';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -18,9 +19,11 @@ export class AuthService {
   private user = signal<IUserDto | undefined>(undefined);
   private token = signal<string | undefined>(undefined);
 
+
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
+    private router: Router,
   ){
     this.token.set(cookieService.get('token'));
   }
@@ -29,14 +32,14 @@ export class AuthService {
   public registerUser(body: {email: string, password: string, name: string}): Observable<IRegisterUser>{
     return this.http.post<IRegisterUser>(`${this.url}/register`, body)
       .pipe(
-        tap(this.saveData)
+        tap( data => this.saveData(data))
       );
   }
 
   public loginUser(body: {email: string, password: string}): Observable<ILoginUser>{
     return this.http.post<ILoginUser>(`${this.urlBase}/login`, body)
       .pipe(
-        tap(this.saveData),
+        tap( data => this.saveData(data)),
       );
   }
 
@@ -60,11 +63,12 @@ export class AuthService {
 
     return this.http.get<IValidateToken>(`${this.url}/validate-token`, {headers})
       .pipe(
-        tap(this.saveData),
+        tap( data => this.saveData(data)),
         tap( data => {
           if( data.data.id !== this.user()?.id ){
             console.log('El usuario no coincide con los datos proporcionados');
             this.logout();
+            this.router.navigate(['/login']);
           }
         })
       );
@@ -87,9 +91,8 @@ export class AuthService {
     this.user.set(data.data);
     this.token.set(data.token!);
 
-    if(data.token){
-      this.cookieService.set('token', data.token);
-    }
+    console.log("Cookie guardada");
+    this.cookieService.set('token', data.token!);
   }
 
   public logout(){

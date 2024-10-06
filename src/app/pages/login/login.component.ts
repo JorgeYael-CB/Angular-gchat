@@ -51,6 +51,7 @@ export class LoginComponent {
       next: (res) => {
         this.isLoading.set(false);
         this.err.set(undefined);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         this.isLoading.set(false);
