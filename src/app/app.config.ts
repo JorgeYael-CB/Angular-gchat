@@ -1,11 +1,8 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
-import { AuthReducer } from './store/AuthStore.reducer';
 
 
 
@@ -15,6 +12,5 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
-    provideStore({auth: AuthReducer}),
   ],
 };

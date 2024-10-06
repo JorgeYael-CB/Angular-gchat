@@ -8,10 +8,6 @@ import { SpinnerLoadingFormComponent } from "../../components/spinner-loading-fo
 import { ShowErrorsComponent } from "../../components/show-errors/show-errors.component";
 import { TypeError } from '../../interfaces/api/IResponseError';
 import { AuthService } from '../../services/auth.service';
-import { Store } from '@ngrx/store';
-import { loginAction } from '../../store/AuthStore.actions';
-import { IAuthState } from '../../interfaces/store/Auth.state';
-
 
 
 @Component({
@@ -32,7 +28,6 @@ export class RegisterComponent {
 
   constructor(
     private authService: AuthService,
-    private authStore: Store<{ auth: IAuthState }>,
     private router: Router,
   ){}
 
@@ -62,7 +57,6 @@ export class RegisterComponent {
         next: (res) => {
           this.isLoading.set(false);
           this.err.set(undefined);
-          this.authStore.dispatch(loginAction({token: res.token!, user: res.data}));
           this.router.navigate(['/']);
         },
         error: (error) => {
