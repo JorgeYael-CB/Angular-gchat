@@ -11,11 +11,13 @@ import { AvatarIconComponent } from "../../components/avatar-icon/avatar-icon.co
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserListComponent } from "../../components/user-list/user-list.component";
+import { ChatMessagesComponent } from "../../components/chat-messages/chat-messages.component";
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [SidebarGroupsComponent, UserDetailsComponent, LoadingPageComponent, AvatarIconComponent, MatIconModule, MatInputModule, MatFormFieldModule],
+  imports: [SidebarGroupsComponent, UserDetailsComponent, LoadingPageComponent, AvatarIconComponent, MatIconModule, MatInputModule, MatFormFieldModule, UserListComponent, ChatMessagesComponent],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })

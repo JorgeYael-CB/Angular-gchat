@@ -1,0 +1,26 @@
+<ul class="h-screen w-[200px] overflow-y-auto bg-gray-800 p-2 space-y-2">
+  <li class="mb-6 mt-2">
+    <mat-form-field class="w-full">
+      <mat-label>User name</mat-label>
+      <input matInput placeholder="Ex. admin">
+    </mat-form-field>
+    <p class="mb-1 text-sm font-light text-white opacity-70">
+      {{server.users.length}} of {{server.usersLimit}} users
+    </p>
+    <hr class="bg-gray-700">
+  </li>
+
+  @for (user of server.users; track $index) {
+    <li
+      class="flex items-center gap-3 p-2 hover:bg-gray-700 rounded-md transition hover:cursor-pointer"
+    >
+      <button class="w-[68px] h-10 rounded-full p-0.5 transition-colors hover:bg-white overflow-hidden bg-gray-600">
+        <app-avatar-icon [url]="user.profileImage?.image"></app-avatar-icon>
+      </button>
+      <div class="flex justify-between items-center w-full">
+        <h4 class="text-sm text-gray-200 font-semibold">{{ user.name }}</h4>
+        <mat-icon class="text-white hover:cursor-pointer transition-colors hover:bg-gray-500" fontIcon="more_vert"></mat-icon>
+      </div>
+    </li>
+  }
+</ul>

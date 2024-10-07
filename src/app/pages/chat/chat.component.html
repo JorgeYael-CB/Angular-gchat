@@ -6,58 +6,8 @@
   <div class="px-4 sm:ml-56">
     <div class="flex flex-row">
       <div class="w-full flex h-screen">
-        <ul class="h-screen w-[200px] overflow-y-auto bg-gray-800 p-2 space-y-2">
-          <li class="mb-6 mt-2">
-            <mat-form-field class="w-full">
-              <mat-label>User name</mat-label>
-              <input matInput placeholder="Ex. admin">
-            </mat-form-field>
-            <p class="mb-1 text-sm font-light text-white opacity-70">
-              {{server.users.length}} of {{server.usersLimit}} users
-            </p>
-            <hr class="bg-gray-700">
-          </li>
-
-          @for (user of server.users; track $index) {
-            <li
-              class="flex items-center gap-3 p-2 hover:bg-gray-700 rounded-md transition hover:cursor-pointer"
-            >
-              <button class="w-[68px] h-10 rounded-full p-0.5 transition-colors hover:bg-white overflow-hidden bg-gray-600">
-                <app-avatar-icon [url]="user.profileImage?.image"></app-avatar-icon>
-              </button>
-              <div class="flex justify-between items-center w-full">
-                <h4 class="text-sm text-gray-200 font-semibold">{{ user.name }}</h4>
-                <mat-icon class="text-white hover:cursor-pointer transition-colors hover:bg-gray-500" fontIcon="more_vert"></mat-icon>
-              </div>
-            </li>
-          }
-        </ul>
-
-        <div class="flex flex-col h-screen w-full bg-indigo-600 p-4">
-          <!-- Mensajes -->
-          <div class="flex-1 overflow-y-scroll bg-white rounded-lg shadow-inner p-4 mb-4 space-y-4">
-            <div class="bg-indigo-100 p-3 rounded-md text-indigo-900 shadow">
-              <p>Mensaje de otro usuario</p>
-            </div>
-            <div class="bg-indigo-200 p-3 rounded-md text-indigo-900 shadow self-end">
-              <p>Mi mensaje</p>
-            </div>
-            <!-- Más mensajes pueden ir aquí -->
-          </div>
-
-          <!-- Input para escribir mensaje -->
-          <div class="flex items-center space-x-3">
-            <input
-              type="text"
-              placeholder="Escribe un mensaje..."
-              class="flex-1 p-2 rounded-md border border-indigo-300 focus:ring-2 focus:ring-indigo-500"
-            />
-            <button class="bg-indigo-500 hover:bg-indigo-700 text-white px-4 py-2 rounded-md">
-              Enviar
-            </button>
-          </div>
-        </div>
-
+        <app-user-list [server]="server"></app-user-list>
+        <app-chat-messages class="w-full"></app-chat-messages>
       </div>
 
       <app-user-details class="h-screen col-span-1" [user]="showCurrentUser"></app-user-details>
