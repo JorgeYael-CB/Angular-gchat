@@ -7,11 +7,15 @@ import { UserDetailsComponent } from "../../components/user-details/user-details
 import { IServerDto } from '../../interfaces/api/dtos/IServerDto';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingPageComponent } from "../../components/loading-page/loading-page.component";
+import { AvatarIconComponent } from "../../components/avatar-icon/avatar-icon.component";
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [SidebarGroupsComponent, UserDetailsComponent, LoadingPageComponent],
+  imports: [SidebarGroupsComponent, UserDetailsComponent, LoadingPageComponent, AvatarIconComponent, MatIconModule, MatInputModule, MatFormFieldModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
