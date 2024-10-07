@@ -2,8 +2,8 @@
 <app-sidebar-groups [servers]="user.servers"></app-sidebar-groups>
 
 <div class="px-4 sm:ml-64">
-  <div class="grid grid-cols-3">
-    <app-join-server class="col-span-2"></app-join-server>
+  <div class="flex flex-row">
+    <app-join-server class="w-full"></app-join-server>
 
     <app-user-details class="h-screen col-span-1" [user]="user"></app-user-details>
   </div>

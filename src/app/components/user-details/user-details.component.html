@@ -1,11 +1,49 @@
-<div class="h-full bg-gray-200 pt-14">
-  <h2 class="text-center text-3xl font-black mb-12">User Details</h2>
-
-  <div class="shadow-md bg-white rounded-md mx-8 p-3">
-    <div class="flex flex-row gap-3 items-center">
-      <app-avatar-icon></app-avatar-icon>
-
-      <p>{{user.name}}</p>
+<div class="relative h-full bg-gray-200 w-96 max-lg:hidden">
+  @if (user.images.length > 0) {
+    <div class="h-44 w-full bg-gray-200 relative overflow-hidden">
+      <div class="carousel-container h-full w-full flex items-center">
+        @for (img of user.images; track $index) {
+          <img
+            [src]="img.image || '/assets/users/default.webp'"
+            class="h-full w-full object-cover transition-opacity duration-500 ease-in-out"
+            alt="User image"
+          />
+        }
+      </div>
+      <!-- Controles para avanzar/retroceder -->
+      <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2" (click)="prevImage()">&#10094;</button>
+      <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black text-white p-2" (click)="nextImage()">&#10095;</button>
     </div>
+  }@else {
+    <div class="w-full h-44 bg-blue-800"></div>
+  }
+
+  <div class="absolute top-16 left-0 transform translate-x-3 translate-y-1/2 h-28 w-28 bg-cover rounded-full border-4 border-gray-800 z-10">
+    <app-avatar-icon (onClick)="onClickImage()" [url]="user.profileImage?.image" ></app-avatar-icon>
+    <div class="font-bold text-xl mt-3 ml-2 flex flex-row items-center gap-2">
+      <h3>{{user.name}}</h3>
+      <img
+        error="/assets/users.image-broken.png"
+        class="w-10 h-6 object-cover"
+        src="/assets/countrys/{{user.country.toLowerCase()}}.png"
+        alt="Country image"
+      >
+    </div>
+  </div>
+
+
+  @if (user.description) {
+    <div class="mt-32 w-full bg-white p-2 max-w-[360px] shadow-md mx-auto">
+      <h3 class="font-bold text-xl mb-2">About me</h3>
+      <p>{{user.description}}</p>
+    </div>
+  }
+
+  <div
+    [ngClass]="{'mt-3': user.description, 'mt-32': !user.description}"
+    class="w-full bg-white p-2 max-w-[360px] shadow-md mx-auto"
+  >
+    <h3 class="font-bold mb-1">Member since</h3>
+    <p class="text-xs">{{formatDate(user.createAt)}}</p>
   </div>
 </div>
