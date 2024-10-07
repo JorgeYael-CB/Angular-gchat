@@ -4,11 +4,13 @@ import { RegisterComponent } from './pages/register/register.component';
 import { isLoggedGuard } from './guards/is-logged.guard';
 import { notLoggedGuard } from './guards/not-logged.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [notLoggedGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [notLoggedGuard]},
-  {path: '', component: HomeComponent, canActivate: [isLoggedGuard]}
+  {path: '', component: HomeComponent, canActivate: [isLoggedGuard]},
+  {path: ':id', component: ChatComponent, canActivate: [isLoggedGuard]},
 ];

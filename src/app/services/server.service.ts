@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { IJoinRandomServer } from '../interfaces/api/server/IJoinRandomServer';
 import { IServerDto } from '../interfaces/api/dtos/IServerDto';
+import { IGetServerById } from '../interfaces/api/server/IGetServerById';
 
 
 @Injectable({
@@ -26,6 +27,18 @@ export class ServerService {
       );
   }
 
-  getServerById( id: number ){}
+  getServerById( id: number ):Observable<IServerDto> {
+    let server = this.servers.get(id);
+    if( server ){
+      console.log('Si viene de memoria');
+      return of(server)
+    };
+
+    return this.http.get<IGetServerById>(`${this.url}/${id}`)
+      .pipe(
+        tap( data => this.servers.set(id, data.data)),
+        map( data => data.data )
+      );
+  }
 
 }

@@ -1,0 +1,14 @@
+@if (isLoadingPage) {
+  <app-loading-page></app-loading-page>
+}@else {
+  <app-sidebar-groups [servers]="user.servers"></app-sidebar-groups>
+
+  <div class="px-4 sm:ml-64">
+    <div class="flex flex-row">
+      <div class="w-full h-screen">
+      </div>
+
+      <app-user-details class="h-screen col-span-1" [user]="showCurrentUser"></app-user-details>
+    </div>
+  </div>
+}
