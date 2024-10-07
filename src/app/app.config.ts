@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { handle401Interceptor } from './interceptors/Handle401.interceptor';
+import { setToken } from './interceptors/SetToken.interceptor';
 
 
 
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([handle401Interceptor])
+      withInterceptors([handle401Interceptor, setToken])
     ),
   ],
 };

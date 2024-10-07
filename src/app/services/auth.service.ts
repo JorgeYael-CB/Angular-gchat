@@ -73,6 +73,14 @@ export class AuthService {
       );
   }
 
+  public getToken():string | undefined {
+    return this.token();
+  }
+
+  public renewToken(token: string){
+    this.token.set(token);
+  }
+
 
   public updateUser(){}
 
